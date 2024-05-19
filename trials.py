@@ -49,25 +49,68 @@ def censor_vowels(word):
         else:
             chars.append(letter)
     return " ".join(chars)
-print(censor_vowels('hello world'))
+# print(censor_vowels('hello world'))
 
 def snake_to_camel(string):
     """Given a string in snake case, return a string in upper camel case."""
+    words = string.split("_")
+    camel_case = ''.join(word.capitalize() for word in words)
+    return camel_case
 
-    return "_".join().upper()
-print(snake_to_camel('hello_world'))
+# print(snake_to_camel('hello_world'))
 
 def longest_word_length(words):
-    pass  # TODO: replace this line with your code
+    """Return the length of the longest word in the given array of words."""
+    longest_word = 0
+    for word in words:
+        if len(word) > longest_word:
+            longest_word = len(word)
+    return longest_word
 
+# print(longest_word_length(['jellyfish', 'zebra']))
 
 def truncate(string):
-    pass  # TODO: replace this line with your code
+    """Truncate repeating characters into one character."""
+    result = []
+    for char in string:
+        if len(result) == 0 or (char != result[len(result) - 1]):
+            result.append(char)
+    return (" ").join(result)
 
+# print(truncate('hi***!!!! wooow'))
 
 def has_balanced_parens(string):
-    pass  # TODO: replace this line with your code
+    """Return true if all parentheses in a given string are balanced."""
+    parens = 0
+    for char in string:
+        if char == "(":
+            parens += 1
+        elif char == ")":
+            parens -= 1
+    if parens < 0:
+        return False
+    return parens == 0
 
+# print(has_balanced_parens('((This) (is) (good))'))
+# print(has_balanced_parens('(Oh no!)('))
 
 def compress(string):
-    pass  # TODO: replace this line with your code
+    """Return a compressed version of the given string."""
+    compressed = []
+    curr_char = string[0]
+    char_count = 1
+    for char in string[1:]:
+        if char == curr_char:
+            char_count += 1
+        else:
+            compressed.append(curr_char)
+            if char_count > 1:
+                compressed.append(str(char_count))
+            curr_char = char
+            char_count = 1
+    compressed.append(curr_char)
+    if char_count > 1:
+        compressed.append(str(char_count))
+    return (" ").join(compressed)
+
+print(compress('Hello, world! Cows go moooo...'))
